@@ -1,4 +1,4 @@
-# argos_analytics
+# Argos Analytics App
 
 A new Flutter project.
 

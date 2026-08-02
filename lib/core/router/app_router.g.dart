@@ -44,6 +44,8 @@ RouteBase get $dashboardShellRouteData => ShellRouteData.$route(
       routes: [
         $publicationsBoardRoute,
         $productosRoute,
+        $usuariosRoute,
+        $rolesRoute,
         $dashboardSectionRoute,
       ],
     );
@@ -80,6 +82,44 @@ extension $ProductosRouteExtension on ProductosRoute {
   static ProductosRoute _fromState(GoRouterState state) => const ProductosRoute();
 
   String get location => GoRouteData.$location('/dashboard/productos');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $usuariosRoute => GoRouteData.$route(
+      path: '/dashboard/usuarios',
+      factory: $UsuariosRouteExtension._fromState,
+    );
+
+extension $UsuariosRouteExtension on UsuariosRoute {
+  static UsuariosRoute _fromState(GoRouterState state) => const UsuariosRoute();
+
+  String get location => GoRouteData.$location('/dashboard/usuarios');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $rolesRoute => GoRouteData.$route(
+      path: '/dashboard/roles',
+      factory: $RolesRouteExtension._fromState,
+    );
+
+extension $RolesRouteExtension on RolesRoute {
+  static RolesRoute _fromState(GoRouterState state) => const RolesRoute();
+
+  String get location => GoRouteData.$location('/dashboard/roles');
 
   void go(BuildContext context) => context.go(location);
 

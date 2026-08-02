@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/auth/auth_session.dart';
+import '../../../../core/auth/permission.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -63,11 +65,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('All Products', style: AppTextStyles.h1),
-              ElevatedButton.icon(
-                onPressed: () => showProductFormDialog(context, onSaved: _controller.refresh),
-                icon: const Icon(Icons.add_rounded, size: 18),
-                label: const Text('Add New Product'),
-              ),
+              if (AuthSession.instance.can('nomencladores', 'productos', PermissionAction.write))
+                ElevatedButton.icon(
+                  onPressed: () => showProductFormDialog(context, onSaved: _controller.refresh),
+                  icon: const Icon(Icons.add_rounded, size: 18),
+                  label: const Text('Add New Product'),
+                ),
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
@@ -157,18 +160,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     tooltip: 'Ver detalle',
                     visualDensity: VisualDensity.compact,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.edit_outlined, size: 18, color: AppColors.textMuted),
-                    onPressed: () => showProductFormDialog(context, product: row, onSaved: _controller.refresh),
-                    tooltip: 'Editar',
-                    visualDensity: VisualDensity.compact,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete_outline_rounded, size: 18, color: AppColors.textMuted),
-                    onPressed: () => showProductDeleteDialog(context, row, onDeleted: _controller.refresh),
-                    tooltip: 'Eliminar',
-                    visualDensity: VisualDensity.compact,
-                  ),
+                  if (AuthSession.instance.can('nomencladores', 'productos', PermissionAction.edit))
+                    IconButton(
+                      icon: const Icon(Icons.edit_outlined, size: 18, color: AppColors.textMuted),
+                      onPressed: () => showProductFormDialog(context, product: row, onSaved: _controller.refresh),
+                      tooltip: 'Editar',
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  if (AuthSession.instance.can('nomencladores', 'productos', PermissionAction.delete))
+                    IconButton(
+                      icon: const Icon(Icons.delete_outline_rounded, size: 18, color: AppColors.textMuted),
+                      onPressed: () => showProductDeleteDialog(context, row, onDeleted: _controller.refresh),
+                      tooltip: 'Eliminar',
+                      visualDensity: VisualDensity.compact,
+                    ),
                 ],
               ),
               onRowTap: (row) => showProductDetailDialog(context, row, onSaved: _controller.refresh),

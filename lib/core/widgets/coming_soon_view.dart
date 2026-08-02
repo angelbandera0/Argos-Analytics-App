@@ -25,7 +25,7 @@ class ComingSoonView extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.12),
+              color: AppColors.primary.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.hourglass_top_rounded, color: AppColors.primary, size: 32),

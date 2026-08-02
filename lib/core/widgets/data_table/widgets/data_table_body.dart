@@ -78,7 +78,7 @@ class DataTableBody<T> extends StatelessWidget {
             if (controller.isLoading)
               Positioned.fill(
                 child: IgnorePointer(
-                  child: Container(color: AppColors.surface.withOpacity(0.5)),
+                  child: Container(color: AppColors.surface.withValues(alpha: 0.5)),
                 ),
               ),
           ],
@@ -117,10 +117,10 @@ class _DataRow<T> extends StatelessWidget {
       onTap: onTap == null ? null : () => onTap!(row),
       child: Container(
         color: selected
-            ? AppColors.primary.withOpacity(0.06)
+            ? AppColors.primary.withValues(alpha: 0.06)
             : index.isEven
                 ? AppColors.surface
-                : AppColors.surfaceMuted.withOpacity(0.4),
+                : AppColors.surfaceMuted.withValues(alpha: 0.4),
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
         child: Row(
           children: [

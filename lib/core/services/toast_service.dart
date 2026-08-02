@@ -158,7 +158,7 @@ class _ToastCardState extends State<_ToastCard> with SingleTickerProviderStateMi
             decoration: BoxDecoration(
               color: AppColors.ink,
               borderRadius: BorderRadius.circular(AppRadius.md),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.18), blurRadius: 16, offset: const Offset(0, 6))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.18), blurRadius: 16, offset: const Offset(0, 6))],
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,

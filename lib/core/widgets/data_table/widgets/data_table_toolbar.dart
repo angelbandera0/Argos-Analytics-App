@@ -124,7 +124,7 @@ class _FilterDropdown extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppRadius.pill),
           border: Border.all(color: active.isNotEmpty ? AppColors.primary : AppColors.border),
-          color: active.isNotEmpty ? AppColors.primary.withOpacity(0.06) : AppColors.surface,
+          color: active.isNotEmpty ? AppColors.primary.withValues(alpha: 0.06) : AppColors.surface,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -5,6 +5,9 @@ import '../../features/auth/presentation/login_screen.dart';
 import '../../features/dashboard/presentation/dashboard_shell.dart';
 import '../../features/dashboard/presentation/screens/products_screen.dart';
 import '../../features/dashboard/presentation/screens/projects_board_screen.dart';
+import '../../features/dashboard/presentation/screens/roles_screen.dart';
+import '../../features/dashboard/presentation/screens/usuarios_screen.dart';
+import '../auth/auth_session.dart';
 import '../services/toast_service.dart';
 import '../widgets/coming_soon_view.dart';
 
@@ -61,6 +64,14 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: ToastService.navigatorKey,
   initialLocation: '/login',
   debugLogDiagnostics: false,
+  refreshListenable: AuthSession.instance,
+  redirect: (context, state) {
+    final loggedIn = AuthSession.instance.isLoggedIn;
+    final goingToLogin = state.matchedLocation == '/login';
+    if (!loggedIn && !goingToLogin) return '/login';
+    if (loggedIn && goingToLogin) return '/dashboard/board';
+    return null;
+  },
   routes: $appRoutes,
 );
 
@@ -80,6 +91,8 @@ class LoginRoute extends GoRouteData {
   routes: [
     TypedGoRoute<PublicationsBoardRoute>(path: '/dashboard/board'),
     TypedGoRoute<ProductosRoute>(path: '/dashboard/productos'),
+    TypedGoRoute<UsuariosRoute>(path: '/dashboard/usuarios'),
+    TypedGoRoute<RolesRoute>(path: '/dashboard/roles'),
     TypedGoRoute<DashboardSectionRoute>(path: '/dashboard/:section'),
   ],
 )
@@ -108,6 +121,25 @@ class ProductosRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const ProductsScreen();
+}
+
+/// `/dashboard/usuarios` — user management (Nomencladores > Gestión de
+/// Usuarios): create/edit/delete the accounts the current role manages.
+class UsuariosRoute extends GoRouteData {
+  const UsuariosRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const UsuariosScreen();
+}
+
+/// `/dashboard/roles` — permission matrix editor (Nomencladores > Roles
+/// y Permisos): pick a managed user, grant read/write/edit/delete per
+/// module option.
+class RolesRoute extends GoRouteData {
+  const RolesRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const RolesScreen();
 }
 
 /// `/dashboard/:section` — generic catch-all for every other sidebar / rail
