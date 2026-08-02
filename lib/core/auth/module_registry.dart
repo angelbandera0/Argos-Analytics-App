@@ -85,6 +85,7 @@ const List<AppModule> kAppModules = [
     icon: Icons.category_rounded,
     options: [
       ModuleOption(id: 'productos', label: 'Productos', path: '/dashboard/productos', icon: Icons.inventory_2_outlined),
+      ModuleOption(id: 'tiendas', label: 'Gestión de Tiendas', path: '/dashboard/tiendas', icon: Icons.storefront_outlined),
       ModuleOption(id: 'categorias', label: 'Categorías', path: '/dashboard/nomencladores-categorias', icon: Icons.sell_outlined),
       ModuleOption(id: 'marcas', label: 'Marcas', path: '/dashboard/nomencladores-marcas', icon: Icons.local_offer_outlined),
       ModuleOption(id: 'usuarios', label: 'Gestión de Usuarios', path: '/dashboard/usuarios', icon: Icons.people_alt_outlined),

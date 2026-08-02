@@ -6,6 +6,7 @@ import '../../features/dashboard/presentation/dashboard_shell.dart';
 import '../../features/dashboard/presentation/screens/products_screen.dart';
 import '../../features/dashboard/presentation/screens/projects_board_screen.dart';
 import '../../features/dashboard/presentation/screens/roles_screen.dart';
+import '../../features/dashboard/presentation/screens/stores_screen.dart';
 import '../../features/dashboard/presentation/screens/usuarios_screen.dart';
 import '../auth/auth_session.dart';
 import '../services/toast_service.dart';
@@ -91,6 +92,7 @@ class LoginRoute extends GoRouteData {
   routes: [
     TypedGoRoute<PublicationsBoardRoute>(path: '/dashboard/board'),
     TypedGoRoute<ProductosRoute>(path: '/dashboard/productos'),
+    TypedGoRoute<TiendasRoute>(path: '/dashboard/tiendas'),
     TypedGoRoute<UsuariosRoute>(path: '/dashboard/usuarios'),
     TypedGoRoute<RolesRoute>(path: '/dashboard/roles'),
     TypedGoRoute<DashboardSectionRoute>(path: '/dashboard/:section'),
@@ -121,6 +123,16 @@ class ProductosRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const ProductsScreen();
+}
+
+/// `/dashboard/tiendas` — store management (Nomencladores > Gestión de
+/// Tiendas): responsive card grid built on the same async data engine as
+/// the tables, plus create/edit/delete/detail dialogs.
+class TiendasRoute extends GoRouteData {
+  const TiendasRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const StoresScreen();
 }
 
 /// `/dashboard/usuarios` — user management (Nomencladores > Gestión de

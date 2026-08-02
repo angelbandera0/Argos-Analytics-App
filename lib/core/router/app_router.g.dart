@@ -44,6 +44,7 @@ RouteBase get $dashboardShellRouteData => ShellRouteData.$route(
       routes: [
         $publicationsBoardRoute,
         $productosRoute,
+        $tiendasRoute,
         $usuariosRoute,
         $rolesRoute,
         $dashboardSectionRoute,
@@ -82,6 +83,25 @@ extension $ProductosRouteExtension on ProductosRoute {
   static ProductosRoute _fromState(GoRouterState state) => const ProductosRoute();
 
   String get location => GoRouteData.$location('/dashboard/productos');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $tiendasRoute => GoRouteData.$route(
+      path: '/dashboard/tiendas',
+      factory: $TiendasRouteExtension._fromState,
+    );
+
+extension $TiendasRouteExtension on TiendasRoute {
+  static TiendasRoute _fromState(GoRouterState state) => const TiendasRoute();
+
+  String get location => GoRouteData.$location('/dashboard/tiendas');
 
   void go(BuildContext context) => context.go(location);
 

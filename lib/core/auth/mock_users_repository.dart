@@ -27,7 +27,7 @@ final List<AppUser> _users = [
     role: AppRole.admin,
     permissions: [
       ...grantModule('board', ['campaigns', 'publications', 'topics', 'planning', 'design-internal', 'development'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'categorias', 'marcas', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'categorias', 'marcas', 'usuarios', 'roles'], kFullCrud),
       ...grantModule('home', ['overview', 'activity', 'shortcuts'], kReadOnly),
       ...grantModule('settings', ['general', 'team', 'billing'], kFullCrud),
     ],
@@ -40,7 +40,7 @@ final List<AppUser> _users = [
     role: AppRole.admin,
     permissions: [
       ...grantModule('board', ['publications', 'topics', 'planning'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios', 'roles'], kFullCrud),
       ...grantModule('home', ['overview'], kReadOnly),
     ],
   ),
@@ -54,7 +54,7 @@ final List<AppUser> _users = [
     role: AppRole.propietario,
     permissions: [
       ...grantModule('board', ['publications', 'topics', 'planning'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios', 'roles'], kFullCrud),
       ...grantModule('home', ['overview'], kReadOnly),
     ],
   ),
@@ -66,7 +66,7 @@ final List<AppUser> _users = [
     role: AppRole.propietario,
     permissions: [
       ...grantModule('board', ['publications'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'usuarios'], kReadOnly),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios'], kReadOnly),
     ],
   ),
 
@@ -80,6 +80,7 @@ final List<AppUser> _users = [
     permissions: [
       ...grantModule('board', ['publications'], kReadOnly),
       ...grantModule('home', ['overview'], kReadOnly),
+      ...grantModule('nomencladores', ['tiendas'], kReadOnly),
     ],
   ),
   AppUser(
