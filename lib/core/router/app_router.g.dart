@@ -45,8 +45,15 @@ RouteBase get $dashboardShellRouteData => ShellRouteData.$route(
         $publicationsBoardRoute,
         $productosRoute,
         $tiendasRoute,
+        $categoriasRoute,
+        $asignacionRoute,
         $usuariosRoute,
         $rolesRoute,
+        $existenciasRoute,
+        $trasladosRoute,
+        $ordenesCompraRoute,
+        $ventasRegistrarRoute,
+        $ventasHistorialRoute,
         $dashboardSectionRoute,
       ],
     );
@@ -112,6 +119,44 @@ extension $TiendasRouteExtension on TiendasRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $categoriasRoute => GoRouteData.$route(
+      path: '/dashboard/nomencladores-categorias',
+      factory: $CategoriasRouteExtension._fromState,
+    );
+
+extension $CategoriasRouteExtension on CategoriasRoute {
+  static CategoriasRoute _fromState(GoRouterState state) => const CategoriasRoute();
+
+  String get location => GoRouteData.$location('/dashboard/nomencladores-categorias');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $asignacionRoute => GoRouteData.$route(
+      path: '/dashboard/asignacion-productos',
+      factory: $AsignacionRouteExtension._fromState,
+    );
+
+extension $AsignacionRouteExtension on AsignacionRoute {
+  static AsignacionRoute _fromState(GoRouterState state) => const AsignacionRoute();
+
+  String get location => GoRouteData.$location('/dashboard/asignacion-productos');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $usuariosRoute => GoRouteData.$route(
       path: '/dashboard/usuarios',
       factory: $UsuariosRouteExtension._fromState,
@@ -140,6 +185,101 @@ extension $RolesRouteExtension on RolesRoute {
   static RolesRoute _fromState(GoRouterState state) => const RolesRoute();
 
   String get location => GoRouteData.$location('/dashboard/roles');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $existenciasRoute => GoRouteData.$route(
+      path: '/dashboard/existencias',
+      factory: $ExistenciasRouteExtension._fromState,
+    );
+
+extension $ExistenciasRouteExtension on ExistenciasRoute {
+  static ExistenciasRoute _fromState(GoRouterState state) => const ExistenciasRoute();
+
+  String get location => GoRouteData.$location('/dashboard/existencias');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $trasladosRoute => GoRouteData.$route(
+      path: '/dashboard/traslados',
+      factory: $TrasladosRouteExtension._fromState,
+    );
+
+extension $TrasladosRouteExtension on TrasladosRoute {
+  static TrasladosRoute _fromState(GoRouterState state) => const TrasladosRoute();
+
+  String get location => GoRouteData.$location('/dashboard/traslados');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $ordenesCompraRoute => GoRouteData.$route(
+      path: '/dashboard/ordenes-compra',
+      factory: $OrdenesCompraRouteExtension._fromState,
+    );
+
+extension $OrdenesCompraRouteExtension on OrdenesCompraRoute {
+  static OrdenesCompraRoute _fromState(GoRouterState state) => const OrdenesCompraRoute();
+
+  String get location => GoRouteData.$location('/dashboard/ordenes-compra');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $ventasRegistrarRoute => GoRouteData.$route(
+      path: '/dashboard/ventas-registrar',
+      factory: $VentasRegistrarRouteExtension._fromState,
+    );
+
+extension $VentasRegistrarRouteExtension on VentasRegistrarRoute {
+  static VentasRegistrarRoute _fromState(GoRouterState state) => const VentasRegistrarRoute();
+
+  String get location => GoRouteData.$location('/dashboard/ventas-registrar');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $ventasHistorialRoute => GoRouteData.$route(
+      path: '/dashboard/ventas-historial',
+      factory: $VentasHistorialRouteExtension._fromState,
+    );
+
+extension $VentasHistorialRouteExtension on VentasHistorialRoute {
+  static VentasHistorialRoute _fromState(GoRouterState state) => const VentasHistorialRoute();
+
+  String get location => GoRouteData.$location('/dashboard/ventas-historial');
 
   void go(BuildContext context) => context.go(location);
 

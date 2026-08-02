@@ -88,8 +88,28 @@ const List<AppModule> kAppModules = [
       ModuleOption(id: 'tiendas', label: 'Gestión de Tiendas', path: '/dashboard/tiendas', icon: Icons.storefront_outlined),
       ModuleOption(id: 'categorias', label: 'Categorías', path: '/dashboard/nomencladores-categorias', icon: Icons.sell_outlined),
       ModuleOption(id: 'marcas', label: 'Marcas', path: '/dashboard/nomencladores-marcas', icon: Icons.local_offer_outlined),
+      ModuleOption(id: 'asignacion', label: 'Asignación Productos-Tienda', path: '/dashboard/asignacion-productos', icon: Icons.assignment_turned_in_outlined),
       ModuleOption(id: 'usuarios', label: 'Gestión de Usuarios', path: '/dashboard/usuarios', icon: Icons.people_alt_outlined),
       ModuleOption(id: 'roles', label: 'Roles y Permisos', path: '/dashboard/roles', icon: Icons.admin_panel_settings_outlined),
+    ],
+  ),
+  AppModule(
+    id: 'inventario',
+    label: 'Inventario',
+    icon: Icons.warehouse_rounded,
+    options: [
+      ModuleOption(id: 'existencias', label: 'Existencias', path: '/dashboard/existencias', icon: Icons.inventory_outlined),
+      ModuleOption(id: 'traslados', label: 'Traslados', path: '/dashboard/traslados', icon: Icons.local_shipping_outlined),
+      ModuleOption(id: 'ordenes-compra', label: 'Órdenes de Compra', path: '/dashboard/ordenes-compra', icon: Icons.receipt_long_outlined),
+    ],
+  ),
+  AppModule(
+    id: 'ventas',
+    label: 'Ventas',
+    icon: Icons.point_of_sale_rounded,
+    options: [
+      ModuleOption(id: 'registrar', label: 'Registrar Venta', path: '/dashboard/ventas-registrar', icon: Icons.add_shopping_cart_rounded),
+      ModuleOption(id: 'historial', label: 'Historial de Ventas', path: '/dashboard/ventas-historial', icon: Icons.receipt_outlined),
     ],
   ),
   AppModule(

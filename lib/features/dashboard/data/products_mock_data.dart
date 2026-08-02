@@ -1,4 +1,5 @@
 import '../../../core/widgets/data_table/app_data_table.dart';
+import 'category_mock_data.dart';
 
 enum ProductStatus { active, pending, canceled, rejected, inactive }
 
@@ -21,6 +22,7 @@ class ProductRow {
     required this.name,
     required this.sku,
     required this.status,
+    required this.categoryId,
     required this.price,
     required this.cost,
     required this.stock,
@@ -32,10 +34,35 @@ class ProductRow {
   final String name;
   final String sku;
   final ProductStatus status;
+
+  /// Links to [CategoryRow.id] in `category_mock_data.dart`.
+  final String categoryId;
   final double price;
+
+  /// Updated automatically whenever a Purchase Order line for this
+  /// product is received — see `receivePurchaseOrder` in
+  /// `inventory_mock_data.dart`.
   final double cost;
+
+  /// Legacy/simple catalog-level figure shown in the Productos table.
+  /// The *real*, location-aware stock (Almacén Central / cada tienda)
+  /// lives in the inventory ledger (`inventory_mock_data.dart`) and is
+  /// what Traslados/Ventas actually read and mutate.
   final int stock;
   final int sales;
+
+  ProductRow copyWith({double? cost}) => ProductRow(
+        id: id,
+        code: code,
+        name: name,
+        sku: sku,
+        status: status,
+        categoryId: categoryId,
+        price: price,
+        cost: cost ?? this.cost,
+        stock: stock,
+        sales: sales,
+      );
 }
 
 final List<String> _names = [
@@ -73,6 +100,7 @@ final List<ProductRow> _allProducts = List.generate(140, (i) {
     name: '${_names[i % _names.length]} ${(i ~/ _names.length) + 1}',
     sku: 'SKU-${(1000 + i)}',
     status: status,
+    categoryId: allCategories[i % allCategories.length].id,
     price: 20 + (i * 7 % 180).toDouble(),
     cost: 10 + (i * 5 % 120).toDouble(),
     stock: (i * 13) % 300,
@@ -146,6 +174,29 @@ void upsertProduct(ProductRow product) {
 
 void deleteProduct(String id) {
   _allProducts.removeWhere((p) => p.id == id);
+}
+
+/// Every product, unfiltered/unpaginated — used by the inventory,
+/// assignment and sales screens, which need the full catalog to build
+/// product pickers rather than one paginated page at a time.
+List<ProductRow> get allProducts => List.unmodifiable(_allProducts);
+
+ProductRow? findProductById(String id) {
+  for (final p in _allProducts) {
+    if (p.id == id) return p;
+  }
+  return null;
+}
+
+bool productsInCategory(String categoryId) => _allProducts.any((p) => p.categoryId == categoryId);
+
+/// Called when a Purchase Order line is received — see
+/// `inventory_mock_data.dart`. Updates the product's cost in place.
+void updateProductCost(String productId, double newCost) {
+  final index = _allProducts.indexWhere((p) => p.id == productId);
+  if (index >= 0) {
+    _allProducts[index] = _allProducts[index].copyWith(cost: newCost);
+  }
 }
 
 /// Generates a fresh id/code pair for a new product created from the UI.

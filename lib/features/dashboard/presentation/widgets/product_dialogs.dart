@@ -7,6 +7,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_dialog.dart';
 import '../../../../core/widgets/app_form_field.dart';
 import '../../../../core/widgets/async_action_button.dart';
+import '../../data/category_mock_data.dart';
 import '../../data/products_mock_data.dart';
 import 'status_pill.dart';
 
@@ -42,6 +43,7 @@ Future<void> showProductFormDialog(
   final costController = TextEditingController(text: product?.cost.toStringAsFixed(2) ?? '');
   final stockController = TextEditingController(text: product?.stock.toString() ?? '');
   final statusNotifier = ValueNotifier<ProductStatus>(product?.status ?? ProductStatus.active);
+  final categoryNotifier = ValueNotifier<String>(product?.categoryId ?? allCategories.first.id);
 
   return showAppDialog(
     context: context,
@@ -57,6 +59,21 @@ Future<void> showProductFormDialog(
             AppFormField(label: 'Nombre', controller: nameController, validator: _requiredValidator),
             const SizedBox(height: AppSpacing.md),
             AppFormField(label: 'SKU', controller: skuController, validator: _requiredValidator),
+            const SizedBox(height: AppSpacing.md),
+            Text('Categoría', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w600)),
+            const SizedBox(height: AppSpacing.xs),
+            ValueListenableBuilder<String>(
+              valueListenable: categoryNotifier,
+              builder: (context, categoryId, _) => DropdownButtonFormField<String>(
+                value: categoryId,
+                items: [
+                  for (final c in allCategories) DropdownMenuItem(value: c.id, child: Text('${c.name} · ${c.kind.label}', style: AppTextStyles.bodyMedium)),
+                ],
+                onChanged: (value) {
+                  if (value != null) categoryNotifier.value = value;
+                },
+              ),
+            ),
             const SizedBox(height: AppSpacing.md),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,6 +172,7 @@ Future<void> showProductFormDialog(
             name: nameController.text.trim(),
             sku: skuController.text.trim(),
             status: statusNotifier.value,
+            categoryId: categoryNotifier.value,
             price: double.parse(priceController.text.trim()),
             cost: double.parse(costController.text.trim()),
             stock: int.parse(stockController.text.trim()),
@@ -227,6 +245,7 @@ Future<void> showProductDetailDialog(
         _DetailRow(label: 'ID', value: product.code),
         _DetailRow(label: 'Nombre', value: product.name),
         _DetailRow(label: 'SKU', value: product.sku),
+        _DetailRow(label: 'Categoría', value: findCategoryById(product.categoryId)?.name ?? '—'),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
           child: Row(

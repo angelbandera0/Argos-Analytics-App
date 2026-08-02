@@ -3,10 +3,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/dashboard/presentation/dashboard_shell.dart';
+import '../../features/dashboard/presentation/screens/assignment_screen.dart';
+import '../../features/dashboard/presentation/screens/categories_screen.dart';
 import '../../features/dashboard/presentation/screens/products_screen.dart';
 import '../../features/dashboard/presentation/screens/projects_board_screen.dart';
+import '../../features/dashboard/presentation/screens/purchase_orders_screen.dart';
+import '../../features/dashboard/presentation/screens/register_sale_screen.dart';
 import '../../features/dashboard/presentation/screens/roles_screen.dart';
+import '../../features/dashboard/presentation/screens/sales_history_screen.dart';
+import '../../features/dashboard/presentation/screens/stock_screen.dart';
 import '../../features/dashboard/presentation/screens/stores_screen.dart';
+import '../../features/dashboard/presentation/screens/transfers_screen.dart';
 import '../../features/dashboard/presentation/screens/usuarios_screen.dart';
 import '../auth/auth_session.dart';
 import '../services/toast_service.dart';
@@ -93,8 +100,15 @@ class LoginRoute extends GoRouteData {
     TypedGoRoute<PublicationsBoardRoute>(path: '/dashboard/board'),
     TypedGoRoute<ProductosRoute>(path: '/dashboard/productos'),
     TypedGoRoute<TiendasRoute>(path: '/dashboard/tiendas'),
+    TypedGoRoute<CategoriasRoute>(path: '/dashboard/nomencladores-categorias'),
+    TypedGoRoute<AsignacionRoute>(path: '/dashboard/asignacion-productos'),
     TypedGoRoute<UsuariosRoute>(path: '/dashboard/usuarios'),
     TypedGoRoute<RolesRoute>(path: '/dashboard/roles'),
+    TypedGoRoute<ExistenciasRoute>(path: '/dashboard/existencias'),
+    TypedGoRoute<TrasladosRoute>(path: '/dashboard/traslados'),
+    TypedGoRoute<OrdenesCompraRoute>(path: '/dashboard/ordenes-compra'),
+    TypedGoRoute<VentasRegistrarRoute>(path: '/dashboard/ventas-registrar'),
+    TypedGoRoute<VentasHistorialRoute>(path: '/dashboard/ventas-historial'),
     TypedGoRoute<DashboardSectionRoute>(path: '/dashboard/:section'),
   ],
 )
@@ -142,6 +156,63 @@ class UsuariosRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const UsuariosScreen();
+}
+
+/// `/dashboard/nomencladores-categorias` — Nomencladores > Categorías.
+class CategoriasRoute extends GoRouteData {
+  const CategoriasRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const CategoriesScreen();
+}
+
+/// `/dashboard/asignacion-productos` — Nomencladores > Asignación de
+/// Productos a Tienda.
+class AsignacionRoute extends GoRouteData {
+  const AsignacionRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const ProductStoreAssignmentScreen();
+}
+
+/// `/dashboard/existencias` — Inventario > Existencias.
+class ExistenciasRoute extends GoRouteData {
+  const ExistenciasRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const StockScreen();
+}
+
+/// `/dashboard/traslados` — Inventario > Traslados.
+class TrasladosRoute extends GoRouteData {
+  const TrasladosRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const TransfersScreen();
+}
+
+/// `/dashboard/ordenes-compra` — Inventario > Órdenes de Compra.
+class OrdenesCompraRoute extends GoRouteData {
+  const OrdenesCompraRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const PurchaseOrdersScreen();
+}
+
+/// `/dashboard/ventas-registrar` — Ventas > Registrar Venta.
+class VentasRegistrarRoute extends GoRouteData {
+  const VentasRegistrarRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const RegisterSaleScreen();
+}
+
+/// `/dashboard/ventas-historial` — Ventas > Historial de Ventas.
+class VentasHistorialRoute extends GoRouteData {
+  const VentasHistorialRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const SalesHistoryScreen();
 }
 
 /// `/dashboard/roles` — permission matrix editor (Nomencladores > Roles

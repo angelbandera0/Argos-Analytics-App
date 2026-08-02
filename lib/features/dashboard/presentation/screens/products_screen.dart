@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/data_table/app_data_table.dart';
+import '../../data/category_mock_data.dart';
 import '../../data/products_mock_data.dart';
 import '../widgets/product_dialogs.dart';
 import '../widgets/status_pill.dart';
@@ -114,6 +115,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   label: 'SKU',
                   flex: 2,
                   cellBuilder: (context, row) => Text(row.sku, style: AppTextStyles.bodySmall),
+                ),
+                AppDataColumn<ProductRow>(
+                  id: 'category',
+                  label: 'Categoría',
+                  flex: 2,
+                  minWidth: 140,
+                  cellBuilder: (context, row) => Text(findCategoryById(row.categoryId)?.name ?? '—', style: AppTextStyles.bodySmall),
                 ),
                 AppDataColumn<ProductRow>(
                   id: 'status',

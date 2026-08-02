@@ -27,7 +27,9 @@ final List<AppUser> _users = [
     role: AppRole.admin,
     permissions: [
       ...grantModule('board', ['campaigns', 'publications', 'topics', 'planning', 'design-internal', 'development'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'tiendas', 'categorias', 'marcas', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'categorias', 'marcas', 'asignacion', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('inventario', ['existencias', 'traslados', 'ordenes-compra'], kFullCrud),
+      ...grantModule('ventas', ['registrar', 'historial'], kFullCrud),
       ...grantModule('home', ['overview', 'activity', 'shortcuts'], kReadOnly),
       ...grantModule('settings', ['general', 'team', 'billing'], kFullCrud),
     ],
@@ -40,7 +42,9 @@ final List<AppUser> _users = [
     role: AppRole.admin,
     permissions: [
       ...grantModule('board', ['publications', 'topics', 'planning'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'asignacion', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('inventario', ['existencias', 'traslados', 'ordenes-compra'], kFullCrud),
+      ...grantModule('ventas', ['registrar', 'historial'], kFullCrud),
       ...grantModule('home', ['overview'], kReadOnly),
     ],
   ),
@@ -54,7 +58,12 @@ final List<AppUser> _users = [
     role: AppRole.propietario,
     permissions: [
       ...grantModule('board', ['publications', 'topics', 'planning'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios', 'roles'], kFullCrud),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'asignacion', 'usuarios', 'roles'], kFullCrud),
+      // Un propietario recibe stock (traslados) y vende, pero la compra
+      // a proveedores queda centralizada en Admin/SuperAdmin.
+      ...grantModule('inventario', ['existencias'], kReadOnly),
+      ...grantModule('inventario', ['traslados'], kFullCrud),
+      ...grantModule('ventas', ['registrar', 'historial'], kFullCrud),
       ...grantModule('home', ['overview'], kReadOnly),
     ],
   ),
@@ -66,7 +75,9 @@ final List<AppUser> _users = [
     role: AppRole.propietario,
     permissions: [
       ...grantModule('board', ['publications'], kFullCrud),
-      ...grantModule('nomencladores', ['productos', 'tiendas', 'usuarios'], kReadOnly),
+      ...grantModule('nomencladores', ['productos', 'tiendas', 'asignacion', 'usuarios'], kReadOnly),
+      ...grantModule('inventario', ['existencias', 'traslados'], kReadOnly),
+      ...grantModule('ventas', ['registrar', 'historial'], kReadOnly),
     ],
   ),
 
@@ -81,6 +92,9 @@ final List<AppUser> _users = [
       ...grantModule('board', ['publications'], kReadOnly),
       ...grantModule('home', ['overview'], kReadOnly),
       ...grantModule('nomencladores', ['tiendas'], kReadOnly),
+      ...grantModule('inventario', ['existencias'], kReadOnly),
+      // El día a día de un trabajador: registrar ventas en su tienda.
+      ...grantModule('ventas', ['registrar', 'historial'], kFullCrud),
     ],
   ),
   AppUser(

@@ -156,6 +156,17 @@ Future<AppDataResult<StoreRow>> fetchStores(AppDataRequest request) async {
 
 List<String> get storeCities => _cities;
 
+/// Every store, unfiltered/unpaginated — used to build store pickers in
+/// the inventory/sales/assignment screens.
+List<StoreRow> get allStoresUnpaged => List.unmodifiable(_allStores);
+
+StoreRow? findStoreById(String id) {
+  for (final s in _allStores) {
+    if (s.id == id) return s;
+  }
+  return null;
+}
+
 void upsertStore(StoreRow store) {
   final index = _allStores.indexWhere((s) => s.id == store.id);
   if (index >= 0) {
